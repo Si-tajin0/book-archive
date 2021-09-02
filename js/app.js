@@ -9,7 +9,9 @@ const searchBook = () => {
 
 
     if (searchField.value === "") {
+        // spinner
         toggleSpinner('none');
+        // book name alert
         const booksFound = document.getElementById('books-found');
 
         booksFound.innerHTML = `
@@ -17,7 +19,9 @@ const searchBook = () => {
          `;
     }
     else {
+        // message toggle
         toggleClearMessage('none');
+        // spinner toggle
         toggleSpinner('block');
         // clear search field 
         searchField.value = '';
@@ -33,15 +37,16 @@ const searchBook = () => {
 
 
 }
-// spinner 
+// toggle spinner 
 const toggleSpinner = displayStyle => {
     document.getElementById('spinner').style.display = displayStyle;
 }
-// clear result 
+// toggle  result 
 const toggleClearResult = displayStyle => {
     document.getElementById('clear-result').style.display = displayStyle;
 
 }
+// toggle message
 const toggleClearMessage = displayStyle => {
     document.getElementById('books-found').style.display = displayStyle;
 }
@@ -92,6 +97,7 @@ const displaySearchResult = (books) => {
     toggleSpinner('none');
     // clear result 
     toggleClearResult('block');
+    // clear message
     toggleClearMessage('block');
 
 
