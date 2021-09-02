@@ -81,10 +81,10 @@ const displaySearchResult = (books) => {
         <div class="card h-100 p-2">
             <img height="400px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h3 class="card-title">Book Name : ${book.title}</h3>
-                <p class="card-text">Author Name : ${book.author_name}</p>
+                <h3 class="card-title">Book Name : ${book.title ? book.title : 'Book name not found'}</h3>
+                <p class="card-text">Author Name : ${book.author_name ? book.author_name : 'Author name not found'}</p>
                 <p class="card-text">First Publish Year : ${book.first_publish_year ? book.first_publish_year : 'publish year not define'}</p>
-                <p class="card-text">Publisher : ${book.publisher}</p>
+                <p class="card-text">Publisher : ${book.publisher ? book.publisher : 'publisher not found'}</p>
             </div>
         </div>
         `;
