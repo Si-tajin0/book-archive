@@ -73,7 +73,7 @@ const displaySearchResult = (books) => {
     // loop 
     books.docs.forEach(book => {
         // undefined image handling
-        if (!book.cover_i === '') {
+        if (!book.cover_i == '') {
             // create a div
             const div = document.createElement('div');
             div.classList.add('col');
