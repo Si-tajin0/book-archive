@@ -4,16 +4,30 @@ const searchBook = () => {
     const searchText = searchField.value;
     // clear result 
     toggleClearResult('none');
-    // toggle spinner 
-    toggleSpinner('block');
-    // clear search field 
-    searchField.value = '';
 
-    // load data 
-    const url = `http://openlibrary.org/search.json?q=${searchText}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displaySearchResult(data.docs));
+    // toggle spinner 
+
+
+    if (searchField.value === "") {
+        toggleSpinner('none');
+        const booksFound = document.getElementById('books-found');
+
+        booksFound.innerHTML = `
+         <h2>Please!, Enter your book Name</h2>
+         `;
+    }
+    else {
+        toggleClearMessage('none');
+        toggleSpinner('block');
+        // clear search field 
+        searchField.value = '';
+
+        // load data 
+        const url = `http://openlibrary.org/search.json?q=${searchText}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displaySearchResult(data));
+    }
 
 
 
@@ -28,16 +42,31 @@ const toggleClearResult = displayStyle => {
     document.getElementById('clear-result').style.display = displayStyle;
 
 }
+const toggleClearMessage = displayStyle => {
+    document.getElementById('books-found').style.display = displayStyle;
+}
+
+
 // display result 
 const displaySearchResult = (books) => {
     const searchBookResult = document.getElementById('search-result');
     // clear data 
     searchBookResult.textContent = '';
-    // Books Found 
-    let booksFound = document.getElementById('books-found').innerText =
-        `Your search Books Found ${books.length}`;
+    const booksFound = document.getElementById('books-found');
+    if (books.numFound === 0) {
+        booksFound.innerHTML = `
+        <h2> Enter valid book Name </h2>`;
+    }
+    else {
+        booksFound.innerHTML = `
+        <h2> Your search Books Found ${books.numFound} </h2>`;
+    }
+
+
+
+
     // loop 
-    books.forEach(book => {
+    books.docs.forEach(book => {
         // undefined image handling
         if (!book.cover_i == '') {
             // create a div
@@ -63,6 +92,7 @@ const displaySearchResult = (books) => {
     toggleSpinner('none');
     // clear result 
     toggleClearResult('block');
+    toggleClearMessage('block');
 
 
 }
